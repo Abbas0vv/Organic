@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Options;
 using Organic.Database;
+using Organic.Database.Interfaces;
 using Organic.Database.Models.Account;
+using Organic.Database.Repositories;
 namespace Organic;
 public class Program
 {
@@ -21,6 +24,8 @@ public class Program
             .AddControllersWithViews()
             .AddRazorRuntimeCompilation();
         builder.Services.AddRazorPages();
+
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
         builder.Services.Configure<IdentityOptions>(options =>
         {
